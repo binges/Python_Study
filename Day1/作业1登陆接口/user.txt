@@ -1,0 +1,3 @@
+admin:passwd
+wang:1
+test:1
