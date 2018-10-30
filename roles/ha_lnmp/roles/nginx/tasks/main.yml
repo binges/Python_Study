@@ -1,0 +1,12 @@
+---
+- yum: name=libtool-libs state=present
+- shell: mkdir -p /usr/local/src
+- shell: mkdir -p /data/soft
+- copy: src=/data/{{nginx}} dest=/data/soft/{{nginx}}
+- copy: src=/data/{{php}} dest=/data/soft/{{php}}
+- shell: rpm -aq |grep nginx || rpm -ivh /data/soft/{{nginx}}
+- shell: rpm -aq |grep php || rpm -ivh /data/soft/{{php}}
+- shell: chdir=/usr/local/src test -d ngingx // chdir 切换目录  test -d 目录是否存在
+- shell: chdir=/usr/local/src test -d php // chdir 切换目录  test -d 目录是否存在
+- shell: netstat -nltp |grep ngingx || /sbin/service ngingx start
+- template: src=index.html.j2 dest=/data/soft/www/index.html

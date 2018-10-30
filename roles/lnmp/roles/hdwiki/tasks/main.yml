@@ -1,0 +1,3 @@
+---
+- unarchive: src=wiki.tar.gz dest=/data/htdocs/www
+- shell: chown -R www:www /data/htdocs/www

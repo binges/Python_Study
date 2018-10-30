@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: deubg dict
+      debug: msg="name----->{{item.kye}} value----->{{item.value}}"
+      with_items:
+        - {kye: "one",value: "v1"}
+        - {kye: "two",value: "v2"}
+        - {kye: "three",value: "v3"}

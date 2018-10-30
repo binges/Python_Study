@@ -1,0 +1,31 @@
+globa;
+	log 127.0.0.1 local2
+	chroot /var/lib/haproxy		#改变当前工作目录
+	pidfile /var/run/haproxy	#当前进程ID文件
+	maxconn	4000			#最大连接数
+	user	root			#所属用户
+	group	root			#所属组
+	deamon				#以守护进程方式运行
+global
+	nbproc	1
+	log	127.0.0.1 local3 info
+defaults
+	option	http-keep-alive
+	mode	{{mode}}
+	option	httplog
+	option	dontlognull
+	option	redispathch
+	retries	3
+	timeout connect	5s
+	timeout clinet 20s
+	timeout server	10s
+frontend anslibe
+	bind {{ anslibe_default_ipv4.address }}:80
+	meod {{ mode }}
+	log global
+	default_backend nginx
+backend nginx
+	balance {{ balance }}
+	{% for host in groups['nginx'] %}
+	server {{ hostvars[host].get('ansible_hostname') }} {{ hostvars[host].get('inventory_hostname') }}:80 check inter 3000 rise 3 fall 2
+	{% endfor %}

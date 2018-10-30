@@ -1,0 +1,28 @@
+{% set list=['one','two','three'] %}
+{% for i in list %}
+    {{i}}
+{% endfor %}
+# 循环
+
+# if
+{% set list=['one','two','three'] %}
+{% for in list %}
+   {% if i === 'one' %}
+            ---> {{i}}
+   {% elif loop.index == 2 %}  //loop.index 索引
+       ---> {{i}}
+   {% else %}
+       ---> {{i}}
+   {% endif %}
+{% endfor %}
+
+
+# 字典
+{% set dict={'dsdd','dfss'} %}
+{% for key,value in dict.iteritems() %}
+   {{key}} ---> {{value}}
+{% endfor %}}
+
+
+{% set dict={'key1':{'key2':'value2'}} %}
+{{ dict['key1']['key2'] }}

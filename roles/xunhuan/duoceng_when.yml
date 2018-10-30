@@ -1,0 +1,21 @@
+---
+- hosts: all
+  tasks:
+    - name: host 192.168.1.1 run this task
+      debug: msg="{{ansible_default_ipv4.address}}"
+      when: ansible_default_ipv4.address == "192.168.1.1"
+    - name: 所有主机都执行
+      shell: hostname
+      register: info
+    - name: 判断主机名
+      debug: msg="{{ansible_fqdn}}"
+      when: info['stdout']=='ceshi3'
+    - name: 主机名是否是以M开头
+      debug: msg="{{ansible_fqdn}}"
+      when: info['stdout']=='ceshi3'
+
+#when: info['stdout'].startswith('M') 判断info['stdout']的值的第一个字符是不是以M开头的，如果是返回true如果不是返回fasle
+#第一个when是判断facts信息，ansible_default_ipv4取ip地址然后进行判断，值是str数据类型，所以一定要加“”引号
+#第二个when是判断主机名是否是ceshi如果是测试就执行，如果不是就不执行
+#第三个when是判断主机名的第一个字符是不是M开头，如果是执行，如果不是就不执行或跳过skiping表示跳过的意思就是不执行
+

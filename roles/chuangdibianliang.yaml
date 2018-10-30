@@ -1,0 +1,9 @@
+---
+- hosts: all
+  gather_facts: Flase
+  tasks:
+    - name: dingyibianliang
+      shell: hostname
+      register: INFO
+    - name: shiyongbianliang
+      debug: msg="ddddd {{INFO.stdout}} ddddd"

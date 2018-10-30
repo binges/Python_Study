@@ -1,0 +1,12 @@
+---
+- name: install mysql
+  yum: name={{item}} state=present
+  with_items:
+    - mysql-server
+    - MySQL-python
+- name: start mysql
+  service: name=mysqld state=started enabled=yes
+- name: create database
+  mysql_db: name={{database}} state=present
+- name: create users
+  mysql_user: name={{user}} password={{password}} priv={{database}}.*:ALL host='%' state=present

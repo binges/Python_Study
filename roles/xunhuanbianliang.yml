@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+    - name: debug loops
+      #debug: msg="{{item}}"
+      yum: name="{{item}}" state=presert
+      with_items:
+        - httpd
+        - php
+        - mysql      
+          #- one
+          #- two
+          #- three

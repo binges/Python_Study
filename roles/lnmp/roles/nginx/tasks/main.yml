@@ -1,0 +1,15 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+    - libtool-libs
+    - libxpm-devel
+    - libng
+- shell: mkdir -p /usr/local/src
+- name: copy nginx config
+  copy: src={{nginx}} dest=/opt/{{nginx}}
+- shell: rpm -aq |grep nginx || rpm -ivh /opt/{{nginx}}
+- service: name=nginx state=restarted
+- copy : src={{php}} dest=/opt/{{php}}
+- shell: rpm -aq |grep php || rpm -ivh /opt/{{php}}
+- service: name=php-fpm state=restarted
+

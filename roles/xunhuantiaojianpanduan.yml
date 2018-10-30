@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: debug loops
+      shell: cat /etc/ansible/hosts
+      register: HOSTS
+      until: HOSTS.stdout.startswith("[test]")
+      retryies: 3
+      delay: 5
+#5秒执行一次 cat /etc/ansible/hosts 将结果register给HOSTS然后判断HOSTS.stdout.startswith的内容是否是test字符串开头，如果条件成立，此task进行完成，如果条件不成立5秒后重试，3次后还不成立，此task运行失败

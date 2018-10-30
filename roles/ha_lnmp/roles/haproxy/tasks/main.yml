@@ -1,0 +1,9 @@
+---
+- name: install haproxy
+  yum: name={{item}} state=present
+  with_items:
+    - haproxy
+- name: copy config
+  templadte: src=haproxy.cfg.js dest=/etc/haproxy/haoroxy.cfg owner=root group=root mode=644
+- name: stast haproxy
+  service: name=haproxy state=started enabled=yes

@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: 判断主机IP地址
+      debug: msg="{{ansible_default_ipv4.address}}"
+      when: ansible_default_ipv4.address == "192.168.2.207"
+

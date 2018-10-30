@@ -1,0 +1,17 @@
+---
+- name: replcae yum
+  hosts: all
+  roles:
+    - base
+- name: install nginx
+  hosts: nginx 
+  roles:
+    - nginx
+- name: install mysql
+  host: mysql
+  roles:
+    - mysql
+- name: install haproxy
+  host: haproxy
+  roles:
+    - haproxy

@@ -1,0 +1,9 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+    - mysql-server
+    - MySQL-python
+- service: name=mysqld state=started
+- mysql_db: name={{database}} state=present
+- mysql_user: name={{user}} password={{password}} priv=*.*:ALL host='%' state=present
+- mysql_user: name={{user}} password={{password}} priv=*.*:ALL host='localhost' state=present

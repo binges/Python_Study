@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars:
+    user:
+      shan:
+        name: shan
+        shell: bash
+      ceshi:
+        name: ceshi
+        shell: zsh
+  tasks:
+    - name: shanliexunhuan
+      debug: msg="{{item}}"
+      with_dict: "{{user}}"

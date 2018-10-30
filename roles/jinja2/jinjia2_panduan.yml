@@ -1,0 +1,5 @@
+---
+- hosts: all
+  gather_facts: False
+  tasks:
+    - template: src=/root/f2.j2 dest=/tmp/f2

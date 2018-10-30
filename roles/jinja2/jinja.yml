@@ -1,0 +1,40 @@
+---
+- hosts: all
+  vars:
+    list: [1,2,3,4]
+    one: "1"
+    str: "string"
+  tasks:
+    - name: print str
+      debug: msg="echo {{str}}"
+    - name: run config
+      shell: df -h
+      register: info
+    - name: debug info
+      debug: msg="{{info.stdout}}"
+    - name: pprint info
+      debug: msg="{{info.stdout|pprint}}"
+    - name:  info
+      debug: msg="{{info}}"
+    - name: debug filter
+      debug: msg="the run cong is cha"
+      when: info|changed
+    - name: debug int and capitalize
+      debug: msg="the int value {{one|int}} the lower value is {{str|capitalize}}"
+    - name: bu bian
+      debug: msg="the int value {{one}} the lower value is {{str}}"
+    - name: debug default filter
+      debug: msg="the variable value is {{ansible|default('ansible is not define')}}"
+
+
+
+#{{}}表示引用变量
+#pprint 格式化输出
+#int 字符串转成int
+#capitalize 字符串首字母大写
+#default 调用变量时，如果变量存在则直接调用变量，如果不存在则使用default设置的值
+# max 列表中最大的值
+# random 随机数 {{list|random}} {{1000|random(1,10)}} //{{最大值|random(取几个数,步长)}}
+# join 连接器   {{list|jion("+")}}
+# replace 替换 {{str|replace('t','T')}}  t替换为T
+# regex_replace 正则替换  {{str|regex_replace('.*tr(.*)$,'wang')}}
